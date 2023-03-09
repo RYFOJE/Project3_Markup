@@ -87,34 +87,68 @@ string insert_br(string text) {
 	return formattedString;
 }
 
+void debug_print_buffer() {
+
+	cout << "Start print debug:" << endl;
+
+
+	streampos pos = std::cin.tellg();
+
+
+	while (true) {
+
+		char c = cin.get();
+
+		if (c == EOF) {
+			break;
+		}
+
+		else if (c == '\n') {
+			cout << "\\n" << endl;
+		}
+
+		else {
+			cout << c;
+		}
+
+	}
+
+	cin.seekg(pos);
+
+	cout << endl << "End print debug:" << endl;
+
+}
+
 textAndSpacing get_text_spacing() {
 	
 	textAndSpacing textStruct;
 	string foundText;
 
+	//debug_print_buffer();
+
+
 	// This will get all the text to be surrounded by <p>
 	while (true) {
-		string tempStr;
+		
+		char c = cin.get();
+		char cp = cin.peek();
 
-		// If it's a new paragraph
-		if (cin.peek() == '\n') {
+		textStruct.text += c;
+
+		// These are the Exit conditions
+		if (c == '\n' && cp == '\n') {
+			cin.get();
 			break;
 		}
-		
-		// Get the proceeding line
-		// This gave me a slight amount of trouble as getline was removing the next newline making the counting of them very unpredictable
-		getline(cin, tempStr);
-		cout << tempStr << endl;
-		// TODO: Add code that will append the text to the textStruct.
-		// I need to take into account that the code will not include any newline characters
 
-
-		// If it was a new line
-		if (tempStr.empty()) {
-			break;
+		else if (cp == EOF) {
+			textStruct.text.pop_back();
+			return textStruct;
 		}
 
 	}
+
+	textStruct.text.pop_back();
 
 	// This will get the total amount of blank lines after the end of the paragraph
 	while (true) {
@@ -128,6 +162,11 @@ textAndSpacing get_text_spacing() {
 		}
 
 		else {
+
+			if (c == EOF) {
+				textStruct.spacing++;
+			}
+
 			cin.unget();
 			break;
 		}
@@ -162,9 +201,9 @@ int main() {
 
 	textAndSpacing text = get_text_spacing();
 
-	cout << text.text << endl;
-	cout << text.spacing << endl;
+	string calculatedStr = surround_p(text);
 
+	cout << calculatedStr;
 
     return 0;
 }
