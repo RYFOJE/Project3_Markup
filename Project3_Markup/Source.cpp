@@ -96,14 +96,15 @@ textAndSpacing get_text_spacing() {
 	while (true) {
 		string tempStr;
 
-		// If it's the end of file
-		/*if (cin.eof()) {
-			return textStruct;
+		// If it's a new paragraph
+		if (cin.peek() == '\n') {
+			break;
 		}
-		*/
+		
 		// Get the proceeding line
+		// This gave me a slight amount of trouble as getline was removing the next newline making the counting of them very unpredictable
 		getline(cin, tempStr);
-
+		cout << tempStr << endl;
 		// TODO: Add code that will append the text to the textStruct.
 		// I need to take into account that the code will not include any newline characters
 
@@ -117,24 +118,20 @@ textAndSpacing get_text_spacing() {
 
 	// This will get the total amount of blank lines after the end of the paragraph
 	while (true) {
-		char c = cin.peek();
-		//char c = cin.get();
+		
+		// Get the next char
+		char c = cin.get();
 
+		// If it's a newline increase count by one
 		if (c == '\n') {
-			cout << "Newline HIT" << endl;
 			textStruct.spacing++;
 		}
 
-		// If the next line is not a newline
-		if (c != '\n') {
-			if (c == EOF) {
-				cout << "EOF HIT" << endl;
-			}
+		else {
+			cin.unget();
 			break;
 		}
 
-		// Advance to what you've peeked (aka move to the next newline)
-		cout << (int)cin.get();
 	}
 
 	return textStruct;
