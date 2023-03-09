@@ -87,6 +87,37 @@ string insert_br(string text) {
 	return formattedString;
 }
 
+string replace_with_br() {
+
+	string tempStr;
+
+	while (true) {
+
+		char c = cin.get();
+		char cp = cin.peek();
+
+		// This will add a newline char
+		if (c == '\n' && (cp == '\n' || cp == EOF)) {
+			tempStr.append("\n<br>");
+
+		}
+		
+		else {
+			// Add the current character to the file
+			tempStr.push_back(c);
+		}
+
+		// If cin has hit an eof (Keep in mind this will get triggered even when cin.peek() hits an EOF)
+		if (cin.eof()) {
+			break;
+		}
+
+	}
+
+	return tempStr;
+
+}
+
 void debug_print_buffer() {
 
 	cout << "Start print debug:" << endl;
@@ -177,6 +208,41 @@ textAndSpacing get_text_spacing() {
 
 }
 
+string surround(string& input, string search, string opening, string closing) {
+
+	string tempStr;
+	size_t currOffset = 0;
+	size_t currIndex = 0;
+
+	size_t searchWordLen = search.length();
+	size_t openingWordLen = opening.length();
+	size_t closingWordLen = closing.length();
+
+	while (true) {
+
+		size_t pos = input.find(search, currOffset);
+
+		if (pos == std::string::npos) {
+			std::cout << "Substring not found" << std::endl;
+			return input;
+		}
+		else {
+			currOffset = pos + searchWordLen;
+			std::cout << "Substring \"" << search << "\" found at position " << pos << ". offsetting to: " << currOffset << endl;
+
+			input.insert(currOffset, closing);
+			input.insert(pos, opening);
+
+			currOffset += openingWordLen + closingWordLen;
+
+		}
+
+	}
+
+
+}
+
+
 bool fileExists(string fileName) {
 	std::ifstream infile(fileName.c_str());
 	return infile.good();
@@ -197,13 +263,11 @@ int main() {
 
 	// https://stackoverflow.com/questions/10150468/how-to-redirect-cin-and-cout-to-files
 	ifstream in(fileName);
-	cin.rdbuf(in.rdbuf()); //redirect std::cin to in.txt!
+	cin.rdbuf(in.rdbuf()); //redirect
 
-	textAndSpacing text = get_text_spacing();
+	string text = replace_with_br();
 
-	string calculatedStr = surround_p(text);
-
-	cout << calculatedStr;
+	cout << text;
 
     return 0;
 }
