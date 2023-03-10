@@ -159,8 +159,8 @@ string replace_with_br(string& text) {
 
 	}
 
-	return tempStr;
-
+	// Reassign the text to the formatted string
+	text.assign(tempStr);
 }
 
 string surround(string& input, string search, string opening, string closing) {

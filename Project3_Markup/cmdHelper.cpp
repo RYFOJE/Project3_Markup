@@ -68,18 +68,23 @@ cmd_struct parse_cmd(int argc, char* argv[]) {
 					commands.notRecognizedChar = curr[i];
 					return commands;
 				}
-
 			}
 		}
 
 		// If it's a file
 		else if (curr.find(".") != string::npos) {
-			if (!fileFound) {
+			if (commands.inputFile.empty()) {
 				commands.inputFile = curr;
 				fileFound = true;
 			}
-			else {
+			else if (commands.outputFile.empty()) {
 				commands.outputFile = curr;
+			}
+
+			else {
+				// TODO: Add better handling for if more than 3 files have been passed
+				commands.notRecognized = true;
+				return commands;
 			}
 		}
 	}

@@ -10,14 +10,6 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 
-	string fileName = "test.txt";
-
-	// https://stackoverflow.com/questions/10150468/how-to-redirect-cin-and-cout-to-files
-	ifstream in(fileName);
-	cin.rdbuf(in.rdbuf()); //redirect
-
-
-
 	// Introduction to the program, Parse command line arguments
 	cmd_struct cmd = parse_cmd(argc, argv);
 
@@ -39,23 +31,24 @@ int main(int argc, char* argv[]) {
 		return EXIT_FAILURE;
 	}
 
-
+	// Redirect cin to point to the file
+	// https://stackoverflow.com/questions/10150468/how-to-redirect-cin-and-cout-to-files
+	ifstream in(cmd.inputFile);
+	cin.rdbuf(in.rdbuf()); //redirect
 
 	// Read text from file and store it in a string for further processing
 	string text = read_from_file();
+
 	
 	if (cmd.isParagraph) {
 		//surround_paragraph(text);
 		cout << text;
 	}
 
-
+	text = replace_with_br(text);
 	
-
-	
-	
-	surround_p(text);
-	consume_nl(text);
+	//surround_p(text);
+	//consume_nl(text);
 
 	cout << text;
 
