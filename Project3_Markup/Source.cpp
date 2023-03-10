@@ -170,11 +170,13 @@ void surround_p(string& text) {
 		char c = ss.get();
 		char cp = ss.peek();
 
+		// If it's the end of paragraph
 		if (isParagraph && c == '\n' && cp == '\n') {
 			formattedString.append("\n</p>\n");
 			isParagraph = false;
 		}
 
+		// If it's the start of a paragraph
 		else if (!isParagraph && c == '\n' && (cp != '\n' && cp != EOF)) {
 			formattedString.append("<p>\n");
 			isParagraph = true;
@@ -184,12 +186,14 @@ void surround_p(string& text) {
 			formattedString.push_back(c);
 		}
 
+		// If it's the end of the file
 		if (ss.eof()) {
 			break;
 		}
 
 	}
 	
+	// Reassign the text to the formatted string
 	text.assign(formattedString);
 
 }
