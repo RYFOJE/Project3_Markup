@@ -3,8 +3,6 @@
 #include <string>
 #include <vector>
 
-
-
 using namespace std;
 
 typedef struct cmd_struct {
