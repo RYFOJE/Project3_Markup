@@ -129,9 +129,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cmdHelper.cpp" />
+    <ClCompile Include="fileHelper.cpp" />
+    <ClCompile Include="htmlHelper.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cmdHelper.h" />
+    <ClInclude Include="fileHelper.h" />
     <ClInclude Include="htmlHelper.h" />
   </ItemGroup>
   <ItemGroup>
