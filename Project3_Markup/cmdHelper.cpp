@@ -95,3 +95,10 @@ void print_help() {
 void print_unrecognized(char arg) {
 	cout << "Unrecognized argument: " << arg << endl;
 }
+
+void print_file_not_found(string filename) {
+	
+	//TODO: Verify the project folder to make sure the output is correct
+	cout << "File not found: " << filename << endl;
+
+}

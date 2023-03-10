@@ -131,14 +131,15 @@ void consume_nl(string& text) {
 
 }
 
-string replace_with_br() {
+string replace_with_br(string& text) {
 
+	stringstream ss(text);
 	string tempStr;
 
 	while (true) {
 
-		char c = cin.get();
-		char cp = cin.peek();
+		char c = ss.get();
+		char cp = ss.peek();
 
 		// This will add a newline char
 		if (c == '\n' && (cp == '\n' || cp == EOF)) {
@@ -152,7 +153,7 @@ string replace_with_br() {
 		}
 
 		// If cin has hit an eof (Keep in mind this will get triggered even when cin.peek() hits an EOF)
-		if (cin.eof()) {
+		if (ss.eof()) {
 			break;
 		}
 

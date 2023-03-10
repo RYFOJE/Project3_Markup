@@ -29,3 +29,4 @@ void print_cmd_struct(cmd_struct cmds);
 cmd_struct parse_cmd(int argc, char* argv[]);
 void print_help();
 void print_unrecognized(char arg);
+void print_file_not_found(string filename);
