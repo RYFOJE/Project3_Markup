@@ -41,7 +41,7 @@ void print_cmd_struct(cmd_struct cmds) {
 
 }
 
-cmd_struct find_args(int argc, char* argv[]) {
+cmd_struct parse_cmd(int argc, char* argv[]) {
 
 	cmd_struct commands;
 	bool fileFound = false;
@@ -340,14 +340,61 @@ string surround(string& input, string search, string opening, string closing) {
 
 }
 
+string read_from_file() {
+	string tempStr;
+
+	while (true) {
+		char c = cin.get();
+
+		if (c == EOF) {
+			break;
+		}
+		
+		tempStr.push_back(c);
+
+	}
+
+	return tempStr;
+}
 
 bool fileExists(string fileName) {
 	std::ifstream infile(fileName.c_str());
 	return infile.good();
 }
 
-int main() {
+void print_help() {
+	cout << "This is a help dialog";
+}
+
+void print_unrecognized(char arg) {
+	cout << "Unrecognized argument: " << arg << endl;
+}
+
+int main(int argc, char* argv[]) {
     
+	// Introduction to the program, Parse command line arguments
+	cmd_struct cmd = parse_cmd(argc, argv);
+
+	if (cmd.isHelp) {
+		print_help();
+		return EXIT_SUCCESS;
+	}
+	
+	else if(cmd.notRecognized) {
+		print_unrecognized(cmd.notRecognized);
+		return EXIT_FAILURE;
+	}
+
+	// Read text from file and store it in a string for further processing
+	string text = read_from_file();
+	
+	if (cmd.isParagraph) {
+		//surround_paragraph(text);
+	}
+
+
+
+	/*
 	string fileName = "test.txt";
 
 	if (fileExists(fileName)) {
@@ -366,6 +413,8 @@ int main() {
 	string text = replace_with_br();
 
 	cout << text;
+
+	*/
 
     return 0;
 }
