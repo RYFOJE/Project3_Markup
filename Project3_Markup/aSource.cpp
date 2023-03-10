@@ -1,4 +1,4 @@
-#include <iostream>
+/* #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -111,4 +111,4 @@ int main(int argc, char* argv[]) {
 
 	print_cmd_struct(cmds);
 	
-}
+}*/
