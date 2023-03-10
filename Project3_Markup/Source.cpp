@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -105,13 +106,6 @@ cmd_struct parse_cmd(int argc, char* argv[]) {
 
 }
 
-typedef struct textAndSpacing
-{
-	string text;
-	int spacing = 0;
-
-} textAndSpacing;
-
 /*
  * name: htmlHeader
  *
@@ -159,20 +153,44 @@ string htmlFooter() {
  * 
  * returns: a string with the text surrounded by <p> and </p> tags
  */
-string surround_p(textAndSpacing textStruct) {
+void surround_p(string& text) {
 
 	string formattedString;
+	stringstream ss(text);
+	string previousStr;
 
-    formattedString.append("<p>\n");
-	formattedString.append(textStruct.text);
-	formattedString.append("\n</p>\n");
-    
-	for (size_t i = 0; i < textStruct.spacing; i++) {
-		formattedString.append("<br>\n");
+	bool isParagraph = false;
+
+	while (true) {
+
+		string tempStr;
+		getline(ss, tempStr);
+
+		if (tempStr.empty() && isParagraph) {
+			formattedString.append("</p>\n");
+			isParagraph = false;
+			previousStr = tempStr;
+		}
+		
+		else if (tempStr.empty() && !isParagraph && !previousStr.empty()) {
+			formattedString.append("<p>\n");
+			isParagraph = true;
+			previousStr = tempStr;
+		}
+
+		else {
+			formattedString.append(tempStr);
+			formattedString.append("\n");
+			previousStr = tempStr;
+		}
+
+		if (ss.eof()) {
+			break;
+		}
 	}
 
-	return formattedString;
-
+	text.assign(formattedString);
+	
 }
 
 /*
@@ -248,64 +266,6 @@ void debug_print_buffer() {
 
 }
 
-textAndSpacing get_text_spacing() {
-	
-	textAndSpacing textStruct;
-	string foundText;
-
-	//debug_print_buffer();
-
-
-	// This will get all the text to be surrounded by <p>
-	while (true) {
-		
-		char c = cin.get();
-		char cp = cin.peek();
-
-		textStruct.text += c;
-
-		// These are the Exit conditions
-		if (c == '\n' && cp == '\n') {
-			cin.get();
-			break;
-		}
-
-		else if (cp == EOF) {
-			textStruct.text.pop_back();
-			return textStruct;
-		}
-
-	}
-
-	textStruct.text.pop_back();
-
-	// This will get the total amount of blank lines after the end of the paragraph
-	while (true) {
-		
-		// Get the next char
-		char c = cin.get();
-
-		// If it's a newline increase count by one
-		if (c == '\n') {
-			textStruct.spacing++;
-		}
-
-		else {
-
-			if (c == EOF) {
-				textStruct.spacing++;
-			}
-
-			cin.unget();
-			break;
-		}
-
-	}
-
-	return textStruct;
-
-}
-
 string surround(string& input, string search, string opening, string closing) {
 
 	string tempStr;
@@ -372,6 +332,13 @@ void print_unrecognized(char arg) {
 
 int main(int argc, char* argv[]) {
     
+	string fileName = "test.txt";
+	
+	// https://stackoverflow.com/questions/10150468/how-to-redirect-cin-and-cout-to-files
+	ifstream in(fileName);
+	cin.rdbuf(in.rdbuf()); //redirect
+
+
 	// Introduction to the program, Parse command line arguments
 	cmd_struct cmd = parse_cmd(argc, argv);
 
@@ -390,12 +357,9 @@ int main(int argc, char* argv[]) {
 	
 	if (cmd.isParagraph) {
 		//surround_paragraph(text);
+		cout << text;
 	}
 
-
-
-	/*
-	string fileName = "test.txt";
 
 	if (fileExists(fileName)) {
 		cout << "File exists" << endl;
@@ -406,15 +370,12 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 
-	// https://stackoverflow.com/questions/10150468/how-to-redirect-cin-and-cout-to-files
-	ifstream in(fileName);
-	cin.rdbuf(in.rdbuf()); //redirect
-
-	string text = replace_with_br();
+	
+	
+	surround_p(text);
 
 	cout << text;
 
-	*/
 
     return 0;
 }
