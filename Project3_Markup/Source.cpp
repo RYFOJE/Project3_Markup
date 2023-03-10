@@ -39,13 +39,11 @@ int main(int argc, char* argv[]) {
 	// Read text from file and store it in a string for further processing
 	string text = read_from_file();
 
-	
 	if (cmd.isParagraph) {
-		//surround_paragraph(text);
-		cout << text;
+		surround_p(text);
 	}
 
-	text = replace_with_br(text);
+	replace_with_br(text);
 	
 	//surround_p(text);
 	//consume_nl(text);

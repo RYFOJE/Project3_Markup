@@ -87,6 +87,9 @@ void surround_p(string& text) {
 
 		// If it's the end of the file
 		if (ss.eof()) {
+			if (isParagraph) {
+				formattedString.append("\n</p>");
+			}
 			break;
 		}
 
@@ -131,7 +134,7 @@ void consume_nl(string& text) {
 
 }
 
-string replace_with_br(string& text) {
+void replace_with_br(string& text) {
 
 	stringstream ss(text);
 	string tempStr;
