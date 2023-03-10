@@ -175,7 +175,7 @@ void surround_p(string& text) {
 			isParagraph = false;
 		}
 
-		else if (!isParagraph && c == '\n' && cp != '\n') {
+		else if (!isParagraph && c == '\n' && (cp != '\n' && cp != EOF)) {
 			formattedString.append("<p>\n");
 			isParagraph = true;
 		}
