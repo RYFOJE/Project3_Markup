@@ -170,8 +170,15 @@ void surround_p(string& text) {
 			formattedString.append("</p>\n");
 			isParagraph = false;
 			previousStr = tempStr;
+
+			if (ss.peek() != '\n') {
+				formattedString.append("<p>\n");
+				isParagraph = true;
+			}
+
 		}
 		
+		// TODO: Logic error here that makes it so the text is not executing correctly
 		else if (tempStr.empty() && !isParagraph && !previousStr.empty()) {
 			formattedString.append("<p>\n");
 			isParagraph = true;
