@@ -157,47 +157,41 @@ void surround_p(string& text) {
 
 	string formattedString;
 	stringstream ss(text);
-	string previousStr;
-
+	char previousChar;
 	bool isParagraph = false;
+	
+	if (ss.peek() != '\n') {
+		formattedString.append("<p>\n");
+		isParagraph = true;
+	}
 
 	while (true) {
-
-		string tempStr;
-		getline(ss, tempStr);
-
-		if (tempStr.empty() && isParagraph) {
-			formattedString.append("</p>\n");
-			isParagraph = false;
-			previousStr = tempStr;
-
-			if (ss.peek() != '\n') {
-				formattedString.append("<p>\n");
-				isParagraph = true;
-			}
-
-		}
 		
-		// TODO: Logic error here that makes it so the text is not executing correctly
-		else if (tempStr.empty() && !isParagraph && !previousStr.empty()) {
+		char c = ss.get();
+		char cp = ss.peek();
+
+		if (isParagraph && c == '\n' && cp == '\n') {
+			formattedString.append("\n</p>\n");
+			isParagraph = false;
+		}
+
+		else if (!isParagraph && c == '\n' && cp != '\n') {
 			formattedString.append("<p>\n");
 			isParagraph = true;
-			previousStr = tempStr;
 		}
-
+		
 		else {
-			formattedString.append(tempStr);
-			formattedString.append("\n");
-			previousStr = tempStr;
+			formattedString.push_back(c);
 		}
 
 		if (ss.eof()) {
 			break;
 		}
-	}
 
-	text.assign(formattedString);
+	}
 	
+	text.assign(formattedString);
+
 }
 
 /*
