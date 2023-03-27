@@ -37,6 +37,7 @@ int main(int argc, char* argv[]) {
 	// Read text from file and store it in a string for further processing
 	string text = read_from_file();
 
+	// If the flag -p has been used
 	if (cmd.isParagraph) {
 		surround_p(text);
 	}

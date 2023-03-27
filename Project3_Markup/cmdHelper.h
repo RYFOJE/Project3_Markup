@@ -4,8 +4,6 @@
 #include <vector>
 #include <iostream>
 
-using namespace std;
-
 // Struct to hold command line arguments
 typedef struct cmd_struct {
 
@@ -29,4 +27,4 @@ void print_cmd_struct(cmd_struct cmds);
 cmd_struct parse_cmd(int argc, char* argv[]);
 void print_help();
 void print_unrecognized(char arg);
-void print_file_not_found(string filename);
+void print_file_not_found(std::string filename);

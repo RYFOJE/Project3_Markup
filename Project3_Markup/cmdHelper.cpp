@@ -6,20 +6,20 @@
 
 void print_cmd_struct(cmd_struct cmds) {
 
-	cout << "isHelp: " << cmds.isHelp << endl;
-	cout << "isParagraph: " << cmds.isParagraph << endl;
-	cout << "isReport: " << cmds.isReport << endl;
-	cout << "inputFile: " << cmds.inputFile << endl;
-	cout << "outputFile: " << cmds.outputFile << endl;
-	cout << "isKeyword: " << cmds.isKeyword << endl;
-	cout << "keywords: ";
+	std::cout << "isHelp: " << cmds.isHelp << std::endl;
+	std::cout << "isParagraph: " << cmds.isParagraph << std::endl;
+	std::cout << "isReport: " << cmds.isReport << std::endl;
+	std::cout << "inputFile: " << cmds.inputFile << std::endl;
+	std::cout << "outputFile: " << cmds.outputFile << std::endl;
+	std::cout << "isKeyword: " << cmds.isKeyword << std::endl;
+	std::cout << "keywords: ";
 	for (size_t i = 0; i < cmds.keywords.size(); i++) {
-		cout << ", " << cmds.keywords[i];
+		std::cout << ", " << cmds.keywords[i];
 	}
 
-	cout << endl;
-	cout << "notRecognized: " << cmds.notRecognized << endl;
-	cout << "notRecognizedChar: " << cmds.notRecognizedChar << endl;
+	std::cout << std::endl;
+	std::cout << "notRecognized: " << cmds.notRecognized << std::endl;
+	std::cout << "notRecognizedChar: " << cmds.notRecognizedChar << std::endl;
 
 }
 
@@ -30,7 +30,7 @@ cmd_struct parse_cmd(int argc, char* argv[]) {
 
 	for (size_t i = 1; i < argc; i++) {
 
-		string curr = argv[i];
+		std::string curr = argv[i];
 
 		if (commands.isKeyword) {
 			// Add the keyword to the vector
@@ -71,7 +71,7 @@ cmd_struct parse_cmd(int argc, char* argv[]) {
 		}
 
 		// If it's a file
-		else if (curr.find(".") != string::npos) {
+		else if (curr.find(".") != std::string::npos) {
 			if (commands.inputFile.empty()) {
 				commands.inputFile = curr;
 				fileFound = true;
@@ -93,16 +93,43 @@ cmd_struct parse_cmd(int argc, char* argv[]) {
 }
 
 void print_help() {
-	cout << "This is a help dialog";
+	/*
+	markup v1.0.0, (c)2010 - 2023, Garth Santor
+
+		usage : markup[--help][-rp] textFilename[htmlFilename][--keywords Args...]
+
+		--help          display the help text for the program.
+		- r              report convertion metrics
+		- p              use <p> tag for paragraph breaks
+
+		textFilename    the name of the ASCII text file to process
+		htmlFilename    the name of the HTML file receiving the output.
+		If not provided the text filename will be used
+		with its extension changed to ".html"
+
+		--keywords          keywords to highlight
+	*/
+
+	std::cout << "markup v1.0.0, (c)2023 - 2023, Ryan Jennings" << std::endl << std::endl;
+	std::cout << "usage: markup [--help] [-r] [-p] textFilename [htmlFilename] [--keywords Args...]" << std::endl << std::endl;
+	std::cout << "\t--help          display the help text for the program." << std::endl;
+	std::cout << "\t-r              report conversion metrics" << std::endl;
+	std::cout << "\t-p              use <p> tag for paragraph breaks" << std::endl << std::endl;
+	std::cout << "\ttextFilename    the name of the ASCII text file to process" << std::endl;
+	std::cout << "\thtmlFilename    the name of the HTML file receiving the output." << std::endl;
+	std::cout << "\t                If not provided the text filename will be used" << std::endl;
+	std::cout << "\t                with its extension changed to \".html\"" << std::endl << std::endl;
+	std::cout << "\t--keywords      keywords to highlight" << std::endl;
+				
 }
 
 void print_unrecognized(char arg) {
-	cout << "Unrecognized argument: " << arg << endl;
+	std::cout << "Unrecognized argument: " << arg << std::endl;
 }
 
 void print_file_not_found(std::string filename) {
 	
 	//TODO: Verify the project folder to make sure the output is correct
-	cout << "File not found: " << filename << endl;
+	std::cout << "File not found: " << filename << std::endl;
 
 }

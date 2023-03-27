@@ -170,6 +170,8 @@ unsigned int replace_with_br(std::string& text) {
 
 	// Reassign the text to the formatted string
 	text.assign(tempStr);
+
+	return runningTotal;
 }
 
 std::string surround(std::string& input, std::string search, std::string opening, std::string closing) {
