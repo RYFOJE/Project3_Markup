@@ -11,11 +11,11 @@ typedef struct cmd_struct {
 	bool isParagraph = false;
 	bool isReport = false;
 
-	string inputFile = "";
-	string outputFile = "";
+	std::string inputFile = "";
+	std::string outputFile = "";
 
 	bool isKeyword = false;
-	vector<string> keywords;
+	std::vector<std::string> keywords;
 
 	bool notRecognized = false;
 	char notRecognizedChar = '0';

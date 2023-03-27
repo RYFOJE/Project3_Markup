@@ -31,11 +31,11 @@ int main(int argc, char* argv[]) {
 
 	// Redirect cin to point to the file
 	// https://stackoverflow.com/questions/10150468/how-to-redirect-cin-and-cout-to-files
-	ifstream in(cmd.inputFile);
+	std::ifstream in(cmd.inputFile);
 	std::cin.rdbuf(in.rdbuf()); //redirect
 
 	// Read text from file and store it in a string for further processing
-	string text = read_from_file();
+	std::string text = read_from_file();
 
 	// If the flag -p has been used
 	if (cmd.isParagraph) {
