@@ -42,8 +42,18 @@ int main(int argc, char* argv[]) {
 		surround_p(text);
 	}
 
+	// Always needs to replace newlines with <br>
 	replace_with_br(text);
-	std::cout << text;
-
+	
+	std::cout << text; //TODO: Remove on deploy
+	
+	// If the user wants a report
+	if (cmd.isReport) {
+		std::cout << "# lines input =" << "placeholder" << std::endl;
+		std::cout << "# paragraphs output =" << "placeholder" << std::endl;
+		std::cout << "# tags =" << "placeholder" << std::endl;
+	}
+	
+	
     return 0;
 }
