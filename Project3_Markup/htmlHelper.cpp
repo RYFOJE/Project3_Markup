@@ -14,7 +14,9 @@
 std::string htmlHeader(std::string title) {
 
 	std::string formattedString;
+	
 
+	// TODO: Add handling for style sheets
 	formattedString.append("<!DOCTYPE html>\n");
 	formattedString.append("<html>\n");
 	formattedString.append("<head>\n");
@@ -49,14 +51,15 @@ std::string htmlFooter() {
  *
  * description: this function will surround the text with <p> and </p> tags
  *
- * returns: void
+ * returns: int representing the amount of paragraphs that were surrounded wit <p> tags
  */
-void surround_p(std::string& text) {
+unsigned int  surround_p(std::string& text) {
 
 	std::string formattedString;
 	std::stringstream ss(text);
 	char previousChar;
 	bool isParagraph = false;
+	unsigned int  runningTotal = 0;
 
 	if (ss.peek() != '\n') {
 		formattedString.append("<p>\n");
@@ -72,6 +75,7 @@ void surround_p(std::string& text) {
 		if (isParagraph && c == '\n' && cp == '\n') {
 			formattedString.append("\n</p>\n");
 			isParagraph = false;
+			runningTotal++;
 		}
 
 		// If it's the start of a paragraph
@@ -96,6 +100,7 @@ void surround_p(std::string& text) {
 
 	// Reassign the text to the formatted string
 	text.assign(formattedString);
+	return runningTotal;
 
 }
 
@@ -133,10 +138,12 @@ void consume_nl(std::string& text) {
 
 }
 
-void replace_with_br(std::string& text) {
+unsigned int replace_with_br(std::string& text) {
 
 	std::stringstream ss(text);
 	std::string tempStr;
+	unsigned int runningTotal = 0;
+
 
 	while (true) {
 

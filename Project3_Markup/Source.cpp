@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 	// Redirect cin to point to the file
 	// https://stackoverflow.com/questions/10150468/how-to-redirect-cin-and-cout-to-files
 	ifstream in(cmd.inputFile);
-	cin.rdbuf(in.rdbuf()); //redirect
+	std::cin.rdbuf(in.rdbuf()); //redirect
 
 	// Read text from file and store it in a string for further processing
 	string text = read_from_file();
@@ -42,12 +42,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	replace_with_br(text);
-	
-	//surround_p(text);
-	//consume_nl(text);
-
-	cout << text;
-
+	std::cout << text;
 
     return 0;
 }
