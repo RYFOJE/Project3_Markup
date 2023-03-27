@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 	// Redirect cin to point to the file
 	// https://stackoverflow.com/questions/10150468/how-to-redirect-cin-and-cout-to-files
 	std::ifstream in(cmd.inputFile);
-	std::cin.rdbuf(in.rdbuf()); //redirect
+	std::cin.rdbuf(in.rdbuf()); //redirect the input from the file to cin
 
 	// Read text from file and store it in a string for further processing
 	std::string text = read_from_file();

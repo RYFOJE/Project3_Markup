@@ -1,6 +1,8 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <filesystem>
+
 
 std::string read_from_file() {
 	std::string tempStr;
@@ -17,11 +19,24 @@ std::string read_from_file() {
 	return tempStr;
 }
 
+/*
+ * name: htmlHeader
+ *
+ * description: this function will return the opening tags for an html document
+ *
+ * returns: a string with the opening tags for an html document
+*/
 bool fileExists(std::string fileName) {
-	std::ifstream infile(fileName.c_str());
-	return infile.good();
+	return std::filesystem::exists(fileName);
 }
 
+/*
+ * name: count_line
+ *
+ * description: this function will count the total amount of lines in the file given to the program
+ *
+ * returns: an unsigned int representing the total amount of lines in the file
+*/
 unsigned int count_lines() {
 
 	unsigned int lineCount = 0;

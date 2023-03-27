@@ -53,7 +53,7 @@ std::string htmlFooter() {
  *
  * returns: int representing the amount of paragraphs that were surrounded wit <p> tags
  */
-unsigned int  surround_p(std::string& text) {
+unsigned int surround_p(std::string& text) {
 
 	std::string formattedString;
 	std::stringstream ss(text);
@@ -101,40 +101,6 @@ unsigned int  surround_p(std::string& text) {
 	// Reassign the text to the formatted string
 	text.assign(formattedString);
 	return runningTotal;
-
-}
-
-void consume_nl(std::string& text) {
-
-	std::stringstream ss(text);
-	std::string tempString;
-
-	// If the first character is a newline, remove it
-	if (ss.peek() == '\n') {
-		ss.get();
-	}
-
-	while (true) {
-
-		char c = ss.get();
-		char cp = ss.peek();
-
-		if (c == '\n' && (cp == '\n' || cp == EOF)) {
-			continue;
-		}
-
-		else {
-			tempString.push_back(c);
-		}
-
-		if (ss.eof()) {
-			break;
-		}
-
-	}
-
-	// Reassign emptied string
-	text.assign(tempString);
 
 }
 
