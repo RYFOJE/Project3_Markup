@@ -5,11 +5,9 @@
 #include <vector>
 #include <sstream>
 
-using namespace std;
-
-string htmlHeader(string title);
-string htmlFooter();
-void surround_p(string& text);
-void consume_nl(string& text);
-void replace_with_br(string& text);
-string surround(string& input, string search, string opening, string closing);
+std::string htmlHeader(std::string title);
+std::string htmlFooter();
+void surround_p(std::string& text);
+void consume_nl(std::string& text);
+void replace_with_br(std::string & text);
+std::string surround(std::string& input, std::string search, std::string opening, std::string closing);

@@ -3,7 +3,6 @@
 #include <vector>
 #include <sstream>
 
-using namespace std;
 
 /*
  * name: htmlHeader
@@ -12,9 +11,9 @@ using namespace std;
  *
  * returns: a string with the opening tags for an html document
 */
-string htmlHeader(string title) {
+std::string htmlHeader(std::string title) {
 
-	string formattedString;
+	std::string formattedString;
 
 	formattedString.append("<!DOCTYPE html>\n");
 	formattedString.append("<html>\n");
@@ -35,9 +34,9 @@ string htmlHeader(string title) {
  *
  * returns: a string with the closing tags for an html document
 */
-string htmlFooter() {
+std::string htmlFooter() {
 
-	string formattedString;
+	std::string formattedString;
 
 	formattedString.append("</body>\n");
 	formattedString.append("</html>\n");
@@ -52,10 +51,10 @@ string htmlFooter() {
  *
  * returns: void
  */
-void surround_p(string& text) {
+void surround_p(std::string& text) {
 
-	string formattedString;
-	stringstream ss(text);
+	std::string formattedString;
+	std::stringstream ss(text);
 	char previousChar;
 	bool isParagraph = false;
 
@@ -100,10 +99,10 @@ void surround_p(string& text) {
 
 }
 
-void consume_nl(string& text) {
+void consume_nl(std::string& text) {
 
-	stringstream ss(text);
-	string tempString;
+	std::stringstream ss(text);
+	std::string tempString;
 
 	// If the first character is a newline, remove it
 	if (ss.peek() == '\n') {
@@ -134,10 +133,10 @@ void consume_nl(string& text) {
 
 }
 
-void replace_with_br(string& text) {
+void replace_with_br(std::string& text) {
 
-	stringstream ss(text);
-	string tempStr;
+	std::stringstream ss(text);
+	std::string tempStr;
 
 	while (true) {
 
@@ -166,9 +165,9 @@ void replace_with_br(string& text) {
 	text.assign(tempStr);
 }
 
-string surround(string& input, string search, string opening, string closing) {
+std::string surround(std::string& input, std::string search, std::string opening, std::string closing) {
 
-	string tempStr;
+	std::string tempStr;
 	size_t currOffset = 0;
 	size_t currIndex = 0;
 
@@ -186,7 +185,7 @@ string surround(string& input, string search, string opening, string closing) {
 		}
 		else {
 			currOffset = pos + searchWordLen;
-			std::cout << "Substring \"" << search << "\" found at position " << pos << ". offsetting to: " << currOffset << endl;
+			std::cout << "Substring \"" << search << "\" found at position " << pos << ". offsetting to: " << currOffset << std::endl;
 
 			input.insert(currOffset, closing);
 			input.insert(pos, opening);
@@ -194,8 +193,5 @@ string surround(string& input, string search, string opening, string closing) {
 			currOffset += openingWordLen + closingWordLen;
 
 		}
-
 	}
-
-
 }

@@ -6,8 +6,6 @@
 #include "cmdHelper.h"
 #include "fileHelper.h"
 
-using namespace std;
-
 int main(int argc, char* argv[]) {
 
 	// Introduction to the program, Parse command line arguments

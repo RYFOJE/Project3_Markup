@@ -2,26 +2,22 @@
 #include <string>
 #include <iostream>
 
-using namespace std;
-
-string read_from_file() {
-	string tempStr;
+std::string read_from_file() {
+	std::string tempStr;
 
 	while (true) {
-		char c = cin.get();
+		char c = std::cin.get();
 
 		if (c == EOF) {
 			break;
 		}
 
 		tempStr.push_back(c);
-
 	}
-
 	return tempStr;
 }
 
-bool fileExists(string fileName) {
+bool fileExists(std::string fileName) {
 	std::ifstream infile(fileName.c_str());
 	return infile.good();
 }

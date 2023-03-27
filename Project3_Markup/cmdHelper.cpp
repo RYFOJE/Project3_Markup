@@ -3,7 +3,6 @@
 #include <iostream>
 #include "cmdHelper.h"
 
-using namespace std;
 
 void print_cmd_struct(cmd_struct cmds) {
 
@@ -101,7 +100,7 @@ void print_unrecognized(char arg) {
 	cout << "Unrecognized argument: " << arg << endl;
 }
 
-void print_file_not_found(string filename) {
+void print_file_not_found(std::string filename) {
 	
 	//TODO: Verify the project folder to make sure the output is correct
 	cout << "File not found: " << filename << endl;
