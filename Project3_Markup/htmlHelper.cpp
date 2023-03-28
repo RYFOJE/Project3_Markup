@@ -70,7 +70,7 @@ std::string generate_html_footer() {
 
 	std::string formattedString;
 
-	formattedString.append("</body>\n");
+	formattedString.append("\n</body>\n");
 	formattedString.append("</html>\n");
 
 	return formattedString;

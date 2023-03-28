@@ -34,8 +34,8 @@ int main(int argc, char* argv[]) {
 	std::string formattedString = "";
 	
 	// Generate the header for the html file
-	std::string headerStr = generate_html_header("filename", cmd.keywords);
-	formattedString.append(headerStr); //TODO: Change it so the name of the file is used
+	std::string headerStr = generate_html_header("filename", cmd.keywords); //TODO: Change it so the name of the file is used
+	formattedString.append(headerStr);
 
 	
 	// Create a filesystem path to the input file
@@ -63,6 +63,7 @@ int main(int argc, char* argv[]) {
 	std::string footerStr = generate_html_footer();
 	formattedString.append(footerStr);
 
+	std::cout << formattedString;
 
 	// If the user wants a report
 	if (cmd.isReport) {
