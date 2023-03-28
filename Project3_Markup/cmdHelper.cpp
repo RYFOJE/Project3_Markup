@@ -10,6 +10,7 @@
 #include <vector>
 #include <iostream>
 #include "cmdHelper.h"
+#include "htmlHelper.h"
 
 /*
  * Function:	parse_cmd
@@ -33,7 +34,10 @@ cmd_struct parse_cmd(int argc, char* argv[]) {
 
 		if (commands.isKeyword) {
 			// Add the keyword to the vector
-			commands.keywords.push_back(curr);
+
+			keyword_struct keyword = create_keyword_struct(curr);
+			
+			commands.keywords.push_back(keyword);
 			continue;
 		}
 
