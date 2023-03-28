@@ -10,6 +10,17 @@
 #include <iostream>
 #include <filesystem>
 
+std::string filename_no_extension(const std::filesystem::path& fpath) {
+
+	// Get the filename as a string
+	std::string str = fpath.filename().string();
+
+	size_t lastindex = str.find_last_of(".");
+
+	return str.substr(0, lastindex);
+
+}
+
 /*
  * Function:	read_from_file
  * purpose:		this function will read the contents of a file and return it as a string
@@ -51,8 +62,8 @@ std::string read_from_file(std::filesystem::path path) {
  *
  * author: 		Ryan Jennings
 */
-bool file_exists(std::string fileName) {
-	return std::filesystem::exists(fileName);
+bool file_exists(std::filesystem::path file) {
+	return std::filesystem::exists(file);
 }
 
 /*
@@ -93,6 +104,7 @@ unsigned int count_lines(std::filesystem::path path) {
  * author: 		Ryan Jennings
 */
 void write_to_file(std::filesystem::path path, std::string &text) {
+
 	std::ofstream outFile(path);
 	std::stringstream ss(text);
 

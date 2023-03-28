@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
 	std::string formattedString = "";
 	
 	// Generate the header for the html file
-	std::string headerStr = generate_html_header("filename", cmd.keywords); //TODO: Change it so the name of the file is used
+	std::string headerStr = generate_html_header(cmd.inputFile, cmd.keywords);
 	formattedString.append(headerStr);
 
 	

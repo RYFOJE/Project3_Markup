@@ -11,6 +11,7 @@
 #include <iostream>
 #include "cmdHelper.h"
 #include "htmlHelper.h"
+#include "fileHelper.h"
 
 /*
  * Function:	parse_cmd
@@ -84,7 +85,6 @@ cmd_struct parse_cmd(int argc, char* argv[]) {
 			}
 
 			else {
-				// TODO: Add better handling for if more than 3 files have been passed
 				commands.notRecognized = true;
 				return commands;
 			}
@@ -158,10 +158,9 @@ void print_unrecognized(char arg) {
  *
  * author: 		Ryan Jennings
 */
-void print_file_not_found(std::string filename) {
+void print_file_not_found(std::filesystem::path filename) {
 	
-	//TODO: Verify the project folder to make sure the output is correct
-	std::cout << "File not found: " << filename << std::endl;
+	std::cout << "File not found: " << filename.string() << std::endl;
 
 }
 
@@ -177,21 +176,15 @@ void print_file_not_found(std::string filename) {
  *
  * author: 		Ryan Jennings
 */
-void find_output_file(std::string inputFilename, std::string &outputFilename) {
+void find_output_file(std::filesystem::path inputFilename, std::filesystem::path &outputFilename) {
 	
 	// If a output filename has already been found, return
-	if (outputFilename.size() != 0) {
+	if (!outputFilename.empty()) {
 		return;
 	}
 
-	size_t pos = inputFilename.find(".");
-
-	if (pos == std::string::npos) {
-		std::cout << "Filename invalid";
-		return;
-	}
-
-	outputFilename.append(inputFilename.substr(0, pos));
-	outputFilename.append(".html");
+	std::string tempStr = filename_no_extension(inputFilename);
+	tempStr.append(".html");
+	outputFilename = tempStr;
 
 }
