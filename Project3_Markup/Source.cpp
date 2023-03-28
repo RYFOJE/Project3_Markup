@@ -34,26 +34,44 @@ int main(int argc, char* argv[]) {
 	std::ifstream in(cmd.inputFile);
 	std::cin.rdbuf(in.rdbuf()); //redirect the input from the file to cin
 
+	// Count the total amount of lines in the file
+	// TODO: Make it so count_lines() sets the pointer back to the beginning of the file
+	//unsigned int lineCount = count_lines();
+
 	// Read text from file and store it in a string for further processing
 	std::string text = read_from_file();
+
+	unsigned int total_paragraphs = 0;
 
 	// If the flag -p has been used
 	if (cmd.isParagraph) {
 		surround_p(text);
 	}
+	
+	unsigned int total_br = 0;
 
 	// Always needs to replace newlines with <br>
-	replace_with_br(text);
+	total_br = replace_with_br(text);
 	
+	
+	surround_helper(text, cmd.keywords);
+	
+
 	std::cout << text; //TODO: Remove on deploy
-	
+
 	// If the user wants a report
 	if (cmd.isReport) {
-		std::cout << "# lines input =" << "placeholder" << std::endl;
-		std::cout << "# paragraphs output =" << "placeholder" << std::endl;
-		std::cout << "# tags =" << "placeholder" << std::endl;
+		std::cout << std::endl << "# lines input =" << count_lines << std::endl;
+		
+		if (total_paragraphs != 0) {
+			std::cout << "# paragraphs output =" << "placeholder" << std::endl;
+		}
+		
+		if (total_br != 0) {
+			std::cout << "# tags =" << "placeholder" << std::endl;
+		}
+
 	}
 	
-	
-    return 0;
+	return EXIT_SUCCESS;
 }

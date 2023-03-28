@@ -3,6 +3,34 @@
 #include <vector>
 #include <sstream>
 
+// This vector holds all the colors that can be selected for coloring the text
+std::vector<std::string> colorList = { "Aqua", "Blue", "Green", "BlueViolet", "Crimson", "Red", "DarkBlue", "DarkOrange",
+										"Fuchsia", "Lime", "Magenta", "Maroon", "Navy", "SeaGreen", "Tomato" };
+
+
+/*
+ * name: generate
+*/
+std::string generate_styling_header(std::vector<std::string>& keywords) {
+
+	std::string formattedString;
+
+	if (keywords.size() == 0) {
+		return formattedString;
+	}
+
+	formattedString.append("<style>\n");
+
+	// Iterate through the color list and add each one to a style list
+	for (size_t i = 0; i < keywords.size(); i++) {
+		std::string color = colorList.at(i);
+
+		formattedString.append("key-" + color + " { color: " + color + " }\n");
+	}
+
+	return formattedString;
+}
+
 
 /*
  * name: htmlHeader
@@ -11,7 +39,7 @@
  *
  * returns: a string with the opening tags for an html document
 */
-std::string htmlHeader(std::string title) {
+std::string htmlHeader(std::string title, std::vector<std::string> &keywords) {
 
 	std::string formattedString;
 	
@@ -25,6 +53,8 @@ std::string htmlHeader(std::string title) {
 	formattedString.append("</title>\n");
 	formattedString.append("</head>\n");
 	formattedString.append("<body>\n");
+
+	generate_styling_header(keywords);
 
 	return formattedString;
 }
@@ -140,6 +170,14 @@ unsigned int replace_with_br(std::string& text) {
 	return runningTotal;
 }
 
+/*
+ * name: surround
+ *
+ * description: this function will surround the text with a given value that is passed
+ *
+ * returns: int representing the amount of paragraphs that were surrounded wit <p> tags
+ */
+
 std::string surround(std::string& input, std::string search, std::string opening, std::string closing) {
 
 	std::string tempStr;
@@ -170,3 +208,21 @@ std::string surround(std::string& input, std::string search, std::string opening
 		}
 	}
 }
+
+unsigned int surround_helper(std::string& input, std::vector<std::string> words) {
+
+	// Iterate through the whole array of words that need to be stylized
+	for (size_t i = 0; i < words.size(); i++) {
+
+		size_t color_index = i % colorList.size();
+		std::string openingTag = "<key-" + colorList[color_index] + ">";
+		std::string closingTag = "</key-" + colorList[color_index] + ">";
+
+
+		surround(input, words.at(i), openingTag, closingTag);
+	}
+
+	return 0; //TODO Change this to return the amount of tags
+
+}
+
