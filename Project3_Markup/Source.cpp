@@ -25,44 +25,49 @@ int main(int argc, char* argv[]) {
 	}
 
 	// If the input file does not exist
-	if (!fileExists(cmd.inputFile)) {
+	if (!file_exists(cmd.inputFile)) {
 		print_file_not_found(cmd.inputFile);
 		return EXIT_FAILURE;
 	}
 
-	// Redirect cin to point to the file
-	// https://stackoverflow.com/questions/10150468/how-to-redirect-cin-and-cout-to-files
+
+	std::string formattedString = "";
+	
+	// Generate the header for the html file
+	std::string headerStr = generate_html_header("filename", cmd.keywords);
+	formattedString.append(headerStr); //TODO: Change it so the name of the file is used
+
+	
+	// Create a filesystem path to the input file
 	std::filesystem::path path(cmd.inputFile);
-	std::ifstream in(path);
-	std::cin.rdbuf(in.rdbuf()); //redirect the input from the file to cin
 
-	// Count the total amount of lines in the file
-	// TODO: Make it so count_lines() sets the pointer back to the beginning of the file
-	//unsigned int lineCount = count_lines();
-
-	// Read text from file and store it in a string for further processing
-	std::string text = read_from_file();
+	// Read bodyText from file and store it in a string for further processing
+	std::string bodyText = read_from_file(path);
 
 	unsigned int total_paragraphs = 0;
 
 	// If the flag -p has been used
 	if (cmd.isParagraph) {
-		surround_p(text);
+		surround_p(bodyText);
 	}
-	
-	unsigned int total_br = 0;
 
 	// Always needs to replace newlines with <br>
-	total_br = replace_with_br(text);
+	unsigned int total_br = 0;
+	total_br = replace_with_br(bodyText);
 	
+	surround_helper(bodyText, cmd.keywords);
 	
-	surround_helper(text, cmd.keywords);
+	formattedString.append(bodyText);
 	
+	// Generate the footer for the html file
+	std::string footerStr = generate_html_footer();
+	formattedString.append(footerStr);
 
-	std::cout << text; //TODO: Remove on deploy
 
 	// If the user wants a report
 	if (cmd.isReport) {
+		
+		unsigned int lineCount = count_lines(path);
 		std::cout << std::endl << "# lines input =" << count_lines << std::endl;
 		
 		if (total_paragraphs != 0) {

@@ -4,11 +4,13 @@
 #include <filesystem>
 
 
-std::string read_from_file() {
+std::string read_from_file(std::filesystem::path path) {
 	std::string tempStr;
+	std::ifstream in(path);
+
 
 	while (true) {
-		char c = std::cin.get();
+		char c = in.get();
 
 		if (c == EOF) {
 			break;
@@ -16,17 +18,20 @@ std::string read_from_file() {
 
 		tempStr.push_back(c);
 	}
+	// Close the file
+	in.close();
+	
 	return tempStr;
 }
 
 /*
- * name: generate_html_header
+ * name: file_exists
  *
- * description: this function will return the opening tags for an html document
+ * description: this function will see if a file exists
  *
  * returns: a string with the opening tags for an html document
 */
-bool fileExists(std::string fileName) {
+bool file_exists(std::string fileName) {
 	return std::filesystem::exists(fileName);
 }
 
@@ -37,12 +42,13 @@ bool fileExists(std::string fileName) {
  *
  * returns: an unsigned int representing the total amount of lines in the file
 */
-unsigned int count_lines() {
+unsigned int count_lines(std::filesystem::path path) {
 
 	unsigned int lineCount = 0;
+	std::ifstream in(path);
 	std::string tempStr;
 
-	while (getline(std::cin, tempStr)) {
+	while (getline(in, tempStr)) {
 		lineCount++;
 	}
 	

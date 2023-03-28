@@ -60,13 +60,13 @@ std::string generate_html_header(std::string title, std::vector<std::string> &ke
 }
 
 /*
- * name: htmlFooter
+ * name: generate_html_foooter
  *
  * description: this function will return the closing tags for an html document
  *
  * returns: a string with the closing tags for an html document
 */
-std::string htmlFooter() {
+std::string generate_html_footer() {
 
 	std::string formattedString;
 
