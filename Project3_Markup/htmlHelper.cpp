@@ -28,7 +28,7 @@ std::vector<std::string> colorList = { "Aqua", "Blue", "Green", "BlueViolet", "C
  *
  * author: 		Ryan Jennings
 */
-std::string generate_styling_header(std::vector<std::string>& keywords) {
+std::string generate_styling_header(std::vector<keyword_struct> &keywords) {
 
 	std::string formattedString;
 
@@ -61,7 +61,7 @@ std::string generate_styling_header(std::vector<std::string>& keywords) {
  *
  * author: 		Ryan Jennings
 */
-std::string generate_html_header(std::string title, std::vector<std::string> &keywords) {
+std::string generate_html_header(std::string title, std::vector<keyword_struct> &keywords) {
 
 	std::string formattedString;
 	
@@ -261,7 +261,7 @@ unsigned int surround_with_tags(std::string& input, std::string search, std::str
  *
  * author: 		Ryan Jennings
 */
-unsigned int surround_helper(std::string& input, std::vector<std::string> words) {
+unsigned int surround_helper(std::string& input, std::vector<keyword_struct> &words) {
 
 	unsigned int runningTotal = 0;
 
@@ -269,11 +269,17 @@ unsigned int surround_helper(std::string& input, std::vector<std::string> words)
 	for (size_t i = 0; i < words.size(); i++) {
 
 		size_t color_index = i % colorList.size();
+
+		words.at(i).associatedColor = colorList[color_index];
+
 		std::string openingTag = "<key-" + colorList[color_index] + ">";
 		std::string closingTag = "</key-" + colorList[color_index] + ">";
 
+		unsigned int totalFound = surround_with_tags(input, words.at(i).keyword, openingTag, closingTag);
 
-		runningTotal += surround_with_tags(input, words.at(i), openingTag, closingTag);
+		// Associate the amount of words found and add it to the running total
+		words.at(i).count = totalFound;
+		runningTotal += totalFound;
 	}
 
 	return runningTotal;
@@ -294,8 +300,18 @@ void print_keyword_count(std::vector<keyword_struct> keywords) {
 
 	for (size_t i = 0; i < keywords.size(); i++) {
 
-		std::cout << "\t\t# " << keywords.at(i).keyword << " = " << keywords.at(i).count << std::endl;
+		std::cout << "\t# " << keywords.at(i).keyword << "(" << keywords.at(i).associatedColor << ")" <<
+			" = " << keywords.at(i).count << std::endl;
 
 	}
 
+}
+
+keyword_struct create_keyword_struct(std::string keyword) {
+
+	keyword_struct temp;
+	temp.keyword = keyword;
+	temp.count = 0;
+
+	return temp;
 }

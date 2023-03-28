@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include "htmlHelper.h"
 
 // Struct to hold command line arguments
 typedef struct cmd_struct {
@@ -15,7 +16,7 @@ typedef struct cmd_struct {
 	std::string outputFile = "";
 
 	bool isKeyword = false;
-	std::vector<std::string> keywords;
+	std::vector<keyword_struct> keywords;
 
 	bool notRecognized = false;
 	char notRecognizedChar = '0';

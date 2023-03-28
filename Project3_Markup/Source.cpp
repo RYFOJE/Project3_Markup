@@ -118,7 +118,7 @@ int main(int argc, char* argv[]) {
 	if (cmd.isReport) {
 		
 		unsigned int lineCount = count_lines(path);
-		std::cout << std::endl << "# lines input = " << lineCount << std::endl;
+		std::cout << "# lines input = " << lineCount << std::endl;
 		
 		if (total_paragraphs != 0) {
 			std::cout << "# paragraphs output = " << total_paragraphs << std::endl;
@@ -126,6 +126,7 @@ int main(int argc, char* argv[]) {
 		
 		if (total_surround != 0) {
 			std::cout << "# tags = " << total_surround << std::endl;
+			print_keyword_count(cmd.keywords);
 		}
 	}
 	
