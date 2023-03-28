@@ -3,7 +3,16 @@
 #include <iostream>
 #include <filesystem>
 
-
+/*
+ * Function:	read_from_file
+ * purpose:		this function will read the contents of a file and return it as a string
+ *
+ * accepts:		std::filesystem::path path - the path to the file to be read
+ *
+ * returns:		std::string - the contents of the file
+ *
+ * author: 		Ryan Jennings
+*/
 std::string read_from_file(std::filesystem::path path) {
 	std::string tempStr;
 	std::ifstream in(path);
@@ -25,22 +34,29 @@ std::string read_from_file(std::filesystem::path path) {
 }
 
 /*
- * name: file_exists
+ * Function:	file_exists
+ * purpose:		this function will check if a file exists. I couldve implemented it in the main
+ *				but it was more readable doing it this way
  *
- * description: this function will see if a file exists
+ * accepts:		std::string fileName - the name of the file to be checked
  *
- * returns: a string with the opening tags for an html document
+ * returns:		bool - true if the file exists, false if it does not
+ *
+ * author: 		Ryan Jennings
 */
 bool file_exists(std::string fileName) {
 	return std::filesystem::exists(fileName);
 }
 
 /*
- * name: count_line
+ * Function:	count_lines
+ * purpose:		Counts the amount of lines in a file
  *
- * description: this function will count the total amount of lines in the file given to the program
+ * accepts:		std::filesystem::path path - the path to the file to be read
  *
- * returns: an unsigned int representing the total amount of lines in the file
+ * returns:		unsigned int - the number of lines in the file
+ *
+ * author: 		Ryan Jennings
 */
 unsigned int count_lines(std::filesystem::path path) {
 
@@ -58,6 +74,17 @@ unsigned int count_lines(std::filesystem::path path) {
 	return lineCount;
 }
 
+/*
+ * Function:	write_to_file
+ * purpose:		This function will write the contents of a string to a file
+ *
+ * accepts:		std::filesystem::path path - the path to the file to be written to
+ *				std::string &text - the text to be written to the file
+ *
+ * returns:		void
+ *
+ * author: 		Ryan Jennings
+*/
 void write_to_file(std::filesystem::path path, std::string &text) {
 	std::ofstream outFile(path);
 	std::stringstream ss(text);
