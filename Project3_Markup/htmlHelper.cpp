@@ -111,7 +111,6 @@ unsigned int surround_p(std::string& text) {
 
 	std::string formattedString;
 	std::stringstream ss(text);
-	char previousChar;
 	bool isParagraph = false;
 	unsigned int  runningTotal = 0;
 
