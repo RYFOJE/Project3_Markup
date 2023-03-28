@@ -20,7 +20,7 @@ std::string read_from_file() {
 }
 
 /*
- * name: htmlHeader
+ * name: generate_html_header
  *
  * description: this function will return the opening tags for an html document
  *

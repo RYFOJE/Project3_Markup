@@ -5,7 +5,7 @@
 #include <vector>
 #include <sstream>
 
-std::string htmlHeader(std::string title, std::vector<std::string>& keywords);
+std::string generate_html_header(std::string title, std::vector<std::string>& keywords);
 std::string generate_styling_header(std::vector<std::string>& keywords);
 std::string htmlFooter();
 unsigned int  surround_p(std::string& text);

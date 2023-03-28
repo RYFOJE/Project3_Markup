@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <filesystem>
 
 #include "htmlHelper.h"
 #include "cmdHelper.h"
@@ -8,7 +9,7 @@
 
 int main(int argc, char* argv[]) {
 
-	// Introduction to the program, Parse command line arguments
+	// Parse command line arguments
 	cmd_struct cmd = parse_cmd(argc, argv);
 
 	// If the user wants to access the help
@@ -31,7 +32,8 @@ int main(int argc, char* argv[]) {
 
 	// Redirect cin to point to the file
 	// https://stackoverflow.com/questions/10150468/how-to-redirect-cin-and-cout-to-files
-	std::ifstream in(cmd.inputFile);
+	std::filesystem::path path(cmd.inputFile);
+	std::ifstream in(path);
 	std::cin.rdbuf(in.rdbuf()); //redirect the input from the file to cin
 
 	// Count the total amount of lines in the file

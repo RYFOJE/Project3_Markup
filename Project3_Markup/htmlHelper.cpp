@@ -33,13 +33,13 @@ std::string generate_styling_header(std::vector<std::string>& keywords) {
 
 
 /*
- * name: htmlHeader
+ * name: generate_html_header
  *
  * description: this function will return the opening tags for an html document
  *
  * returns: a string with the opening tags for an html document
 */
-std::string htmlHeader(std::string title, std::vector<std::string> &keywords) {
+std::string generate_html_header(std::string title, std::vector<std::string> &keywords) {
 
 	std::string formattedString;
 	
