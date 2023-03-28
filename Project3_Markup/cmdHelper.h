@@ -23,7 +23,6 @@ typedef struct cmd_struct {
 } cmd_struct;
 
 // Function prototypes
-void print_cmd_struct(cmd_struct cmds);
 cmd_struct parse_cmd(int argc, char* argv[]);
 void print_help();
 void print_unrecognized(char arg);

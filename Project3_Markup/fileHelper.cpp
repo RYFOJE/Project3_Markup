@@ -1,3 +1,10 @@
+/*
+ * File:		fileHelper.cpp
+ * Purpose:		This file contains the functions that will be used to manipulate files
+ *
+ * Author:		Ryan Jennings
+*/
+
 #include <fstream>
 #include <string>
 #include <iostream>

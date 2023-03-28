@@ -1,3 +1,10 @@
+/*
+ * File:		htmlHelper.cpp
+ * Purpose:		This file contains the functions that will be used to generate the html document
+ * 
+ * Author:		Ryan Jennings
+*/
+
 #include <iostream>
 #include <string>
 #include <vector>

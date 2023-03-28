@@ -1,3 +1,11 @@
+/*
+ * File:		cmdHelper.cpp
+ * Purpose:		This file contains the functions that will be used to assist 
+				the program to understand command line arguments
+ *
+ * Author:		Ryan Jennings
+*/
+
 #include <string>
 #include <vector>
 #include <iostream>
