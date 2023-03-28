@@ -9,10 +9,13 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include "htmlHelper.h"
 
 // This vector holds all the colors that can be selected for coloring the text
 std::vector<std::string> colorList = { "Aqua", "Blue", "Green", "BlueViolet", "Crimson", "Red", "DarkBlue", "DarkOrange",
 										"Fuchsia", "Lime", "Magenta", "Maroon", "Navy", "SeaGreen", "Tomato" };
+
+
 
 
 /*
@@ -274,5 +277,25 @@ unsigned int surround_helper(std::string& input, std::vector<std::string> words)
 	}
 
 	return runningTotal;
+
+}
+
+/*
+ * Function:	print_keyword_count
+ * purpose:		prints the number of times a keyword was found
+ *
+ * accepts:		 std::vector<keyword_struct> keywords - the vector of keywords
+ *
+ * returns:		void
+ *
+ * author: 		Ryan Jennings
+*/
+void print_keyword_count(std::vector<keyword_struct> keywords) {
+
+	for (size_t i = 0; i < keywords.size(); i++) {
+
+		std::cout << "\t\t# " << keywords.at(i).keyword << " = " << keywords.at(i).count << std::endl;
+
+	}
 
 }
