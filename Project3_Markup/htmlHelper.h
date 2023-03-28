@@ -17,7 +17,7 @@ typedef struct keyword_struct {
 
 } keyword_struct;
 
-std::string generate_html_header(std::string title, std::vector<keyword_struct>& keywords);
+std::string generate_html_header(const std::filesystem::path& fpath, std::vector<keyword_struct>& keywords);
 std::string generate_styling_header(std::vector<std::string>& keywords);
 std::string generate_html_footer();
 unsigned int  surround_p(std::string& text);

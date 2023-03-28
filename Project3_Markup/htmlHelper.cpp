@@ -9,14 +9,13 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <filesystem>
 #include "htmlHelper.h"
+#include "fileHelper.h"
 
 // This vector holds all the colors that can be selected for coloring the text
 std::vector<std::string> colorList = { "Aqua", "Blue", "Green", "BlueViolet", "Crimson", "Red", "DarkBlue", "DarkOrange",
 										"Fuchsia", "Lime", "Magenta", "Maroon", "Navy", "SeaGreen", "Tomato" };
-
-
-
 
 /*
  * Function:	generate_styling_header
@@ -61,17 +60,15 @@ std::string generate_styling_header(std::vector<keyword_struct> &keywords) {
  *
  * author: 		Ryan Jennings
 */
-std::string generate_html_header(std::string title, std::vector<keyword_struct> &keywords) {
+std::string generate_html_header(const std::filesystem::path &fpath, std::vector<keyword_struct> &keywords) {
 
 	std::string formattedString;
 	
-
-	// TODO: Add handling for style sheets
 	formattedString.append("<!DOCTYPE html>\n");
 	formattedString.append("<html>\n");
 	formattedString.append("<head>\n");
 	formattedString.append("<title>");
-	formattedString.append(title);
+	formattedString.append(filename_no_extension(fpath));
 	formattedString.append("</title>\n");
 	formattedString.append(generate_styling_header(keywords));
 	formattedString.append("</head>\n");
