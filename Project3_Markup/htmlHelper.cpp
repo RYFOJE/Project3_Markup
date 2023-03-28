@@ -9,7 +9,14 @@ std::vector<std::string> colorList = { "Aqua", "Blue", "Green", "BlueViolet", "C
 
 
 /*
- * name: generate
+ * Function:	generate_styling_header
+ * purpose:		This function will generate the styling header for the html document
+ *
+ * accepts:		std::vector<std::string>& keywords - a vector of keywords that will be used to generate the styling
+ *
+ * returns:		std::string - a string with the styling header
+ *
+ * author: 		Ryan Jennings
 */
 std::string generate_styling_header(std::vector<std::string>& keywords) {
 
@@ -34,11 +41,15 @@ std::string generate_styling_header(std::vector<std::string>& keywords) {
 }
 
 /*
- * name: generate_html_header
+ * Function:	generate_html_header
+ * purpose:		This function will generate the header for the html document
  *
- * description: this function will return the opening tags for an html document
+ * accepts:		std::string title - the title of the html document
+ *				std::vector<std::string>& keywords - a vector of keywords that will be used to generate the styling
+ * 
+ * returns:		std::string - a string with the header for the html document
  *
- * returns: a string with the opening tags for an html document
+ * author: 		Ryan Jennings
 */
 std::string generate_html_header(std::string title, std::vector<std::string> &keywords) {
 
@@ -60,11 +71,14 @@ std::string generate_html_header(std::string title, std::vector<std::string> &ke
 }
 
 /*
- * name: generate_html_foooter
+ * Function:	genereate_html_footer
+ * purpose:		This function will generate the footer for the html document
+ * 
+ * accepts:		none
  *
- * description: this function will return the closing tags for an html document
+ * returns:		std::string - a string with the footer for the html document
  *
- * returns: a string with the closing tags for an html document
+ * author: 		Ryan Jennings
 */
 std::string generate_html_footer() {
 
@@ -77,12 +91,15 @@ std::string generate_html_footer() {
 }
 
 /*
- * name: surround_p
+ * Function:	surround_p
+ * purpose:		surrounds all paragraphs with <p> tags
  *
- * description: this function will surround_with_tags the text with <p> and </p> tags
+ * accepts:		std::string& text - the text to be formatted
  *
- * returns: int representing the amount of paragraphs that were surrounded wit <p> tags
- */
+ * returns:		usigned int - the number of paragraphs that were found
+ *
+ * author: 		Ryan Jennings
+*/
 unsigned int surround_p(std::string& text) {
 
 	std::string formattedString;
@@ -134,6 +151,16 @@ unsigned int surround_p(std::string& text) {
 
 }
 
+/*
+ * Function:	replace_with_br
+ * purpose:		replaces all blank lines with <br> tags
+ *
+ * accepts:		std::string &text - the text to be formatted
+ *
+ * returns:		unsigned int - the number of blank lines that were found
+ *
+ * author: 		Ryan Jennings
+*/
 unsigned int replace_with_br(std::string& text) {
 
 	std::stringstream ss(text);
@@ -171,13 +198,18 @@ unsigned int replace_with_br(std::string& text) {
 }
 
 /*
- * name: surround_with_tags
+ * Function:	surround_with_tags
+ * purpose:		surrounds all instances of a word with a given tag
  *
- * description: this function will surround_with_tags the text with a given value that is passed
+ * accepts:		std::string& input - the text to be formatted
+ *				std::string search - the word to be searched for
+ *				std::string opening - the opening tag
+ *				std::string closing - the closing tag
  *
- * returns: int representing the amount of paragraphs that were surrounded wit <p> tags
- */
-
+ * returns:		unsigned int - the number of times the word was found
+ *
+ * author: 		Ryan Jennings
+*/
 unsigned int surround_with_tags(std::string& input, std::string search, std::string opening, std::string closing) {
 
 	std::string tempStr;
@@ -209,6 +241,17 @@ unsigned int surround_with_tags(std::string& input, std::string search, std::str
 	}
 }
 
+/*
+ * Function:	surround_helper
+ * purpose:		this is a helper function for surround_with_tags
+ *
+ * accepts:		std:::string &input - the text to be formatted
+ *				std::vector<std::string> words - the words to be searched for
+ *
+ * returns:		unsigned int - the number of times the words were found
+ *
+ * author: 		Ryan Jennings
+*/
 unsigned int surround_helper(std::string& input, std::vector<std::string> words) {
 
 	unsigned int runningTotal = 0;
