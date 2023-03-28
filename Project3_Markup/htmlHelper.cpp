@@ -28,9 +28,10 @@ std::string generate_styling_header(std::vector<std::string>& keywords) {
 		formattedString.append("key-" + color + " { color: " + color + " }\n");
 	}
 
+	formattedString.append("</style>\n");
+
 	return formattedString;
 }
-
 
 /*
  * name: generate_html_header
@@ -51,10 +52,9 @@ std::string generate_html_header(std::string title, std::vector<std::string> &ke
 	formattedString.append("<title>");
 	formattedString.append(title);
 	formattedString.append("</title>\n");
+	formattedString.append(generate_styling_header(keywords));
 	formattedString.append("</head>\n");
 	formattedString.append("<body>\n");
-
-	generate_styling_header(keywords);
 
 	return formattedString;
 }
@@ -71,7 +71,7 @@ std::string generate_html_footer() {
 	std::string formattedString;
 
 	formattedString.append("\n</body>\n");
-	formattedString.append("</html>\n");
+	formattedString.append("</html>");
 
 	return formattedString;
 }
@@ -79,7 +79,7 @@ std::string generate_html_footer() {
 /*
  * name: surround_p
  *
- * description: this function will surround the text with <p> and </p> tags
+ * description: this function will surround_with_tags the text with <p> and </p> tags
  *
  * returns: int representing the amount of paragraphs that were surrounded wit <p> tags
  */
@@ -171,18 +171,19 @@ unsigned int replace_with_br(std::string& text) {
 }
 
 /*
- * name: surround
+ * name: surround_with_tags
  *
- * description: this function will surround the text with a given value that is passed
+ * description: this function will surround_with_tags the text with a given value that is passed
  *
  * returns: int representing the amount of paragraphs that were surrounded wit <p> tags
  */
 
-std::string surround(std::string& input, std::string search, std::string opening, std::string closing) {
+unsigned int surround_with_tags(std::string& input, std::string search, std::string opening, std::string closing) {
 
 	std::string tempStr;
 	size_t currOffset = 0;
 	size_t currIndex = 0;
+	unsigned int runningTotal = 0;
 
 	size_t searchWordLen = search.length();
 	size_t openingWordLen = opening.length();
@@ -193,12 +194,11 @@ std::string surround(std::string& input, std::string search, std::string opening
 		size_t pos = input.find(search, currOffset);
 
 		if (pos == std::string::npos) {
-			std::cout << "Substring not found" << std::endl;
-			return input;
+			return runningTotal;
 		}
 		else {
 			currOffset = pos + searchWordLen;
-			std::cout << "Substring \"" << search << "\" found at position " << pos << ". offsetting to: " << currOffset << std::endl;
+			runningTotal++;
 
 			input.insert(currOffset, closing);
 			input.insert(pos, opening);
@@ -211,6 +211,8 @@ std::string surround(std::string& input, std::string search, std::string opening
 
 unsigned int surround_helper(std::string& input, std::vector<std::string> words) {
 
+	unsigned int runningTotal = 0;
+
 	// Iterate through the whole array of words that need to be stylized
 	for (size_t i = 0; i < words.size(); i++) {
 
@@ -219,10 +221,9 @@ unsigned int surround_helper(std::string& input, std::vector<std::string> words)
 		std::string closingTag = "</key-" + colorList[color_index] + ">";
 
 
-		surround(input, words.at(i), openingTag, closingTag);
+		runningTotal += surround_with_tags(input, words.at(i), openingTag, closingTag);
 	}
 
-	return 0; //TODO Change this to return the amount of tags
+	return runningTotal;
 
 }
-

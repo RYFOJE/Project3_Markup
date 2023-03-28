@@ -48,14 +48,15 @@ int main(int argc, char* argv[]) {
 
 	// If the flag -p has been used
 	if (cmd.isParagraph) {
-		surround_p(bodyText);
+		total_paragraphs = surround_p(bodyText);
 	}
 
 	// Always needs to replace newlines with <br>
 	unsigned int total_br = 0;
 	total_br = replace_with_br(bodyText);
 	
-	surround_helper(bodyText, cmd.keywords);
+	unsigned int total_surround = 0;
+	total_surround = surround_helper(bodyText, cmd.keywords);
 	
 	formattedString.append(bodyText);
 	
@@ -64,21 +65,21 @@ int main(int argc, char* argv[]) {
 	formattedString.append(footerStr);
 
 	std::cout << formattedString;
-
+	write_to_file(std::filesystem::path("output.txt"), formattedString); //TODO: Replace with not hardcoded file out
+	
 	// If the user wants a report
 	if (cmd.isReport) {
 		
 		unsigned int lineCount = count_lines(path);
-		std::cout << std::endl << "# lines input =" << count_lines << std::endl;
+		std::cout << std::endl << "# lines input = " << lineCount << std::endl;
 		
 		if (total_paragraphs != 0) {
-			std::cout << "# paragraphs output =" << "placeholder" << std::endl;
+			std::cout << "# paragraphs output = " << total_paragraphs << std::endl;
 		}
 		
-		if (total_br != 0) {
-			std::cout << "# tags =" << "placeholder" << std::endl;
+		if (total_surround != 0) {
+			std::cout << "# tags = " << total_surround << std::endl;
 		}
-
 	}
 	
 	return EXIT_SUCCESS;

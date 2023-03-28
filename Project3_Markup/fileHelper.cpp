@@ -57,3 +57,17 @@ unsigned int count_lines(std::filesystem::path path) {
 
 	return lineCount;
 }
+
+void write_to_file(std::filesystem::path path, std::string &text) {
+	std::ofstream outFile(path);
+	std::stringstream ss(text);
+
+	char c = ss.get();
+
+	while (!ss.fail()) {
+		outFile << c;
+		c = ss.get();
+	}
+
+	outFile.close();
+}
