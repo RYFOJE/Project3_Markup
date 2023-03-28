@@ -307,6 +307,16 @@ void print_keyword_count(std::vector<keyword_struct> keywords) {
 
 }
 
+/*
+ * Function:	create_keyword_struct
+ * purpose:		creates a struct for a keyword
+ *
+ * accepts:		std::string keyword - the keyword to be added
+ *
+ * returns:		keywords_struct - the struct that was created
+ *
+ * author: 		Ryan Jennings
+*/
 keyword_struct create_keyword_struct(std::string keyword) {
 
 	keyword_struct temp;
