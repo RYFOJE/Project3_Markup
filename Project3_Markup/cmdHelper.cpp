@@ -3,26 +3,6 @@
 #include <iostream>
 #include "cmdHelper.h"
 
-
-void print_cmd_struct(cmd_struct cmds) {
-
-	std::cout << "isHelp: " << cmds.isHelp << std::endl;
-	std::cout << "isParagraph: " << cmds.isParagraph << std::endl;
-	std::cout << "isReport: " << cmds.isReport << std::endl;
-	std::cout << "inputFile: " << cmds.inputFile << std::endl;
-	std::cout << "outputFile: " << cmds.outputFile << std::endl;
-	std::cout << "isKeyword: " << cmds.isKeyword << std::endl;
-	std::cout << "keywords: ";
-	for (size_t i = 0; i < cmds.keywords.size(); i++) {
-		std::cout << ", " << cmds.keywords[i];
-	}
-
-	std::cout << std::endl;
-	std::cout << "notRecognized: " << cmds.notRecognized << std::endl;
-	std::cout << "notRecognizedChar: " << cmds.notRecognizedChar << std::endl;
-
-}
-
 cmd_struct parse_cmd(int argc, char* argv[]) {
 
 	cmd_struct commands;
@@ -131,5 +111,24 @@ void print_file_not_found(std::string filename) {
 	
 	//TODO: Verify the project folder to make sure the output is correct
 	std::cout << "File not found: " << filename << std::endl;
+
+}
+
+void find_output_file(std::string inputFilename, std::string &outputFilename) {
+	
+	// If a output filename has already been found, return
+	if (outputFilename.size() != 0) {
+		return;
+	}
+
+	size_t pos = inputFilename.find(".");
+
+	if (pos == std::string::npos) {
+		std::cout << "Filename invalid";
+		return;
+	}
+
+	outputFilename.append(inputFilename.substr(0, pos));
+	outputFilename.append(".html");
 
 }

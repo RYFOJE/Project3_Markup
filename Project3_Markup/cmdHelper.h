@@ -28,3 +28,4 @@ cmd_struct parse_cmd(int argc, char* argv[]);
 void print_help();
 void print_unrecognized(char arg);
 void print_file_not_found(std::string filename);
+void find_output_file(const std::string inFilename, std::string &outFilename);
